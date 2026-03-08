@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-google-blue: #708238;
+  --color-google-red: #d93025;
+  --color-google-yellow: #f9ab00;
+  --color-google-green: #1e8e3e;
+  --color-heading-green: #0d652d;
+  
+  --color-bg-light: #f1f3f4;
+  --color-bg-dark: #202124;
+  --color-surface-light: #f8f9fa;
+  --color-surface-dark: #292a2d;
+  
+  --color-border-light: #dadce0;
+  --color-border-dark: #3c4043;
+  
+  --shadow-google: 0 1px 2px 0 rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
+  --shadow-google-hover: 0 1px 3px 0 rgba(60,64,67,.30), 0 4px 8px 3px rgba(60,64,67,.15);
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply bg-bg-light text-[#202124] antialiased selection:bg-google-blue/20 transition-colors duration-300;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    @apply bg-bg-dark text-[#e8eaed];
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-heading-green dark:text-white;
+  }
+}
+
+@utility google-card {
+  @apply bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-xl shadow-google transition-all duration-200;
+}
+
+@utility google-button-primary {
+  @apply bg-google-blue hover:bg-[#5a6a2d] text-white font-medium px-6 py-2 rounded-lg transition-all shadow-sm hover:shadow-md;
+}
+
+@utility google-button-outline {
+  @apply border border-border-light dark:border-border-dark hover:bg-surface-light dark:hover:bg-white/5 text-google-blue font-medium px-6 py-2 rounded-lg transition-all;
+}
+
+/* Background Animated Blobs - More Subtle for Google Theme */
+.bg-blob {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  opacity: 0.03;
+  animation: blob-float 40s infinite alternate ease-in-out;
+  will-change: transform;
+}
+
+@keyframes blob-float {
+  0% { transform: translate(-5%, -5%) scale(1); }
+  100% { transform: translate(5%, 5%) scale(1.05); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full border-[3px] border-transparent bg-clip-content hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full border-[3px] border-transparent bg-clip-content hover:bg-google-blue transition-colors;
+}
+
